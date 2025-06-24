@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Menu, X, Search, Plus, MessageCircle, User, LogOut, Settings } from 'lucide-react';
 import { Menu as HeadlessMenu } from '@headlessui/react';
+import logo from '../assets/circlo-logo.png';
 
 const Header: React.FC = () => {
   const { user, logout } = useAuth();
@@ -27,9 +28,7 @@ const Header: React.FC = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">C</span>
-              </div>
+              <img src={logo} alt="Circlo Logo" className="w-12 h-12 rounded-full shadow" />
               <span className="text-xl font-bold text-gray-900">Circlo</span>
             </Link>
           </div>

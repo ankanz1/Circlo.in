@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram } from 'lucide-react';
+import logo from '../assets/circlo-logo.png';
 
 const Footer: React.FC = () => {
   return (
@@ -10,9 +11,7 @@ const Footer: React.FC = () => {
           {/* Brand */}
           <div className="col-span-1">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">C</span>
-              </div>
+              <img src={logo} alt="Circlo Logo" className="w-8 h-8 rounded-full shadow" />
               <span className="text-xl font-bold">Circlo</span>
             </div>
             <p className="text-gray-400 text-sm mb-4">

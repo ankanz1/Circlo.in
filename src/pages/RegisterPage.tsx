@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
 import AadhaarVerification from '../components/AadhaarVerification';
+import logo from '../assets/circlo-logo.png';
 
 const RegisterPage: React.FC = () => {
   const { register, isLoading } = useAuth();
@@ -50,9 +51,7 @@ const RegisterPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <Link to="/" className="flex justify-center items-center space-x-2 mb-6">
-          <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
-            <span className="text-white font-bold text-lg">C</span>
-          </div>
+          <img src={logo} alt="Circlo Logo" className="w-16 h-16 rounded-full shadow" />
           <span className="text-2xl font-bold text-gray-900">Circlo</span>
         </Link>
         
