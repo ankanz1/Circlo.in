@@ -108,7 +108,7 @@ const CulturalVaultPage: React.FC = () => {
                     
                     <div className="flex items-center justify-between">
                       <div className="flex items-baseline space-x-2">
-                        <span className="text-2xl font-bold text-gray-900">${item.price}</span>
+                        <span className="text-2xl font-bold text-gray-900">₹{item.price}</span>
                         <span className="text-gray-500">per {item.priceUnit}</span>
                       </div>
                       <Link

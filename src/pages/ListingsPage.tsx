@@ -213,7 +213,7 @@ const ListingsPage: React.FC = () => {
                       
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center space-x-1">
-                          <span className="text-xl font-bold text-gray-900">${listing.price}</span>
+                          <span className="text-xl font-bold text-gray-900">₹{listing.price}</span>
                           <span className="text-gray-500 text-sm">/{listing.priceUnit}</span>
                         </div>
                         <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">

@@ -292,7 +292,7 @@ const BookingPage: React.FC = () => {
                 ) : (
                   <>
                     <CreditCard className="w-5 h-5" />
-                    <span>Confirm & Pay ${total.toFixed(2)}</span>
+                    <span>Confirm & Pay ₹{total.toFixed(2)}</span>
                   </>
                 )}
               </button>

@@ -272,7 +272,7 @@ const AddListingPage: React.FC = () => {
                     Price *
                   </label>
                   <div className="relative">
-                    <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 font-bold">₹</span>
                     <input
                       type="number"
                       id="price"

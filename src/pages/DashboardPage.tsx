@@ -112,7 +112,7 @@ const DashboardPage: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600">Total Earnings</p>
-              <p className="text-2xl font-bold text-gray-900">${totalEarnings}</p>
+              <p className="text-2xl font-bold text-gray-900">₹{totalEarnings}</p>
             </div>
             <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
               <DollarSign className="w-6 h-6 text-green-600" />
@@ -170,7 +170,7 @@ const DashboardPage: React.FC = () => {
               </div>
               <div className="flex-1">
                 <p className="text-sm font-medium text-gray-900">Payment received</p>
-                <p className="text-sm text-gray-500">Canon EOS R5 Camera rental - $85</p>
+                <p className="text-sm text-gray-500">Canon EOS R5 Camera rental - ₹85</p>
               </div>
               <span className="text-sm text-gray-500">2 hours ago</span>
             </div>
@@ -253,7 +253,7 @@ const DashboardPage: React.FC = () => {
                 
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-1">
-                    <span className="text-lg font-bold text-gray-900">${listing.price}</span>
+                    <span className="text-lg font-bold text-gray-900">₹{listing.price}</span>
                     <span className="text-gray-500 text-sm">/{listing.priceUnit}</span>
                   </div>
                   <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">

@@ -171,7 +171,7 @@ const HomePage: React.FC = () => {
                   </p>
                   <div className="flex justify-between items-center">
                     <div className="flex items-center space-x-1">
-                      <span className="text-2xl font-bold text-gray-900">${listing.price}</span>
+                      <span className="text-2xl font-bold text-gray-900">₹{listing.price}</span>
                       <span className="text-gray-500">/{listing.priceUnit}</span>
                     </div>
                     <span className="text-gray-500 text-sm">{listing.location}</span>

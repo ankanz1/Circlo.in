@@ -269,7 +269,7 @@ const ProductDetailPage: React.FC = () => {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <div className="flex items-baseline space-x-2">
-                    <span className="text-3xl font-bold text-gray-900">${listing.price}</span>
+                    <span className="text-3xl font-bold text-gray-900">₹{listing.price}</span>
                     <span className="text-gray-500">per {listing.priceUnit}</span>
                   </div>
                 </div>
