@@ -77,8 +77,10 @@ const CulturalVaultPage: React.FC = () => {
                           className="w-full h-64 lg:h-80 object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                         <div className="absolute top-4 left-4 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center space-x-1">
-                          <Award className="w-4 h-4" />
-                          <span>Vault Item</span>
+                          <span className="flex items-center">
+                            <Award className="w-4 h-4" />
+                            <span>Vault Item</span>
+                          </span>
                         </div>
                         <div className="absolute top-4 right-4 bg-white bg-opacity-90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center space-x-1">
                           <Star className="w-3 h-3 text-yellow-500 fill-current" />

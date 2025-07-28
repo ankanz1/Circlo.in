@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useApp } from '../contexts/AppContext';
-import { Search, Filter, MapPin, Star, Calendar } from 'lucide-react';
+import { Search, Filter, MapPin, Star, Calendar, Smartphone, Shirt, Wrench, Sparkles, ChevronLeft, ChevronRight, Heart, Car, Baby, Dumbbell, Book, Sofa } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const ListingsPage: React.FC = () => {
@@ -12,8 +12,92 @@ const ListingsPage: React.FC = () => {
   const [priceRange, setPriceRange] = useState({ min: '', max: '' });
   const [showFilters, setShowFilters] = useState(false);
   const [locationFilter, setLocationFilter] = useState('');
+  const categoryScrollRef = useRef<HTMLDivElement>(null);
 
-  const categories = ['all', 'electronics', 'fashion', 'tools', 'culture'];
+  const categories = ['all', 'electronics', 'fashion', 'tools', 'toys', 'auto', 'sports', 'books', 'furniture', 'culture'];
+  
+  const categoryData = [
+    {
+      id: 'all',
+      name: 'All Categories',
+      description: 'Browse all available items across every category',
+      icon: Search,
+      gradient: 'from-slate-600 to-slate-700',
+      image: 'https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&dpr=2'
+    },
+    {
+      id: 'electronics',
+      name: 'Electronics',
+      description: 'Latest gadgets and tech equipment for all your digital needs',
+      icon: Smartphone,
+      gradient: 'from-blue-600 to-purple-700',
+      image: 'https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&dpr=2'
+    },
+    {
+      id: 'fashion',
+      name: 'Fashion',
+      description: 'Trendy clothing and fashion accessories for every occasion',
+      icon: Shirt,
+      gradient: 'from-pink-500 to-rose-600',
+      image: 'https://images.pexels.com/photos/996329/pexels-photo-996329.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&dpr=2'
+    },
+    {
+      id: 'tools',
+      name: 'Tools & Equip',
+      description: 'Professional tools and equipment for work and projects',
+      icon: Wrench,
+      gradient: 'from-orange-500 to-red-600',
+      image: 'https://images.pexels.com/photos/1249611/pexels-photo-1249611.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&dpr=2'
+    },
+    {
+      id: 'toys',
+      name: 'Toys, Baby',
+      description: 'Toys and baby products for all ages',
+      icon: Baby,
+      gradient: 'from-purple-500 to-pink-500',
+      image: 'https://images.pexels.com/photos/3661352/pexels-photo-3661352.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&dpr=2'
+    },
+    {
+      id: 'auto',
+      name: 'Auto Accessories',
+      description: 'Car and bike accessories for your ride',
+      icon: Car,
+      gradient: 'from-red-500 to-yellow-600',
+      image: 'https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&dpr=2'
+    },
+    {
+      id: 'sports',
+      name: 'Sports & Fit',
+      description: 'Sports, fitness, and outdoor equipment',
+      icon: Dumbbell,
+      gradient: 'from-green-500 to-blue-500',
+      image: 'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&dpr=2'
+    },
+    {
+      id: 'books',
+      name: 'Books & Med',
+      description: 'Books, study, and medical resources',
+      icon: Book,
+      gradient: 'from-yellow-500 to-orange-400',
+      image: 'https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&dpr=2'
+    },
+    {
+      id: 'furniture',
+      name: 'Furniture',
+      description: 'Home and office furniture for every space',
+      icon: Sofa,
+      gradient: 'from-indigo-500 to-purple-400',
+      image: 'https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&dpr=2'
+    },
+    {
+      id: 'culture',
+      name: 'Cultural Vault',
+      description: 'Unique cultural items and traditional artifacts',
+      icon: Sparkles,
+      gradient: 'from-amber-500 to-yellow-600',
+      image: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&dpr=2'
+    }
+  ];
 
   const filteredAndSortedListings = useMemo(() => {
     let filtered = listings.filter(listing => {
@@ -78,13 +162,184 @@ const ListingsPage: React.FC = () => {
                   placeholder="Search items..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] transition-all shadow-sm hover:shadow-md"
+                  className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] shadow-sm"
                 />
               </div>
             </div>
           </div>
         </div>
       </motion.div>
+
+      {/* Explore Categories Section */}
+      <div className="gradient-bg py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between mb-12">
+            <div>
+              <h2 className="text-3xl font-bold text-circlo-black mb-2">Explore Categories</h2>
+              <p className="text-circlo-black/70 text-lg">
+                Discover amazing items across different categories • {listings.length} items available
+              </p>
+            </div>
+            <button 
+              className="gradient-text font-semibold flex items-center space-x-1"
+              onClick={() => setSelectedCategory('all')}
+            >
+              <span>View All</span>
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="relative">
+            {/* Navigation Arrows */}
+            <button
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 glass-card backdrop-blur-md rounded-full flex items-center justify-center text-circlo-black opacity-70"
+              onClick={() => {
+                if (categoryScrollRef.current) {
+                  categoryScrollRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+                }
+              }}
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-gradient-gold rounded-full flex items-center justify-center text-circlo-black shadow-lg"
+              onClick={() => {
+                if (categoryScrollRef.current) {
+                  categoryScrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+                }
+              }}
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            {/* Category Cards */}
+            <div
+              ref={categoryScrollRef}
+              className="overflow-x-auto scrollbar-hide scroll-smooth"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              <div className="flex space-x-8 pb-4 px-2" style={{ minWidth: 'max-content' }}>
+                {categoryData.map((category, index) => {
+                  const IconComponent = category.icon;
+                  const itemCount = category.id === 'all' 
+                    ? listings.length 
+                    : listings.filter(item => 
+                        category.id === 'culture' ? item.isVaultItem : item.category.toLowerCase() === category.id
+                      ).length;
+                  const isSelected = selectedCategory === category.id;
+
+                  return (
+                    <div
+                      key={category.id}
+                      className="group cursor-pointer"
+                      onClick={() => setSelectedCategory(category.id)}
+                    >
+                      <div className={`glass-card backdrop-blur-sm rounded-2xl overflow-hidden border transition-all duration-300 relative w-48 h-56 min-w-48 max-w-48`}>
+                        {/* Gold gradient overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-circlo-gold/10 via-transparent to-circlo-yellow/5 pointer-events-none"></div>
+                        
+                        {/* Inner gold accent */}
+                        <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-circlo-gold/20 to-transparent rounded-2xl pointer-events-none"></div>
+                        
+                        {/* Bottom gold accent bar */}
+                        <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-circlo-gold via-circlo-yellow to-circlo-gold pointer-events-none ${
+                          isSelected ? 'opacity-100' : 'opacity-60'
+                        }`}></div>
+                        
+                        {/* Selected state enhancement */}
+                        {isSelected && (
+                          <div className="absolute inset-0 bg-gradient-to-br from-circlo-gold/5 via-circlo-yellow/3 to-circlo-gold/10 pointer-events-none"></div>
+                        )}
+                        {/* Header */}
+                        <div className="p-4 pb-2 relative z-10">
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="flex items-center space-x-3">
+                              <div className={`w-10 h-10 rounded-xl flex items-center justify-center shadow-lg transition-all duration-300 ${
+                                isSelected 
+                                  ? 'bg-gradient-gold' 
+                                  : `bg-gradient-to-r ${category.gradient}`
+                              }`}>
+                                <IconComponent className={`w-5 h-5 transition-colors duration-300 ${
+                                  isSelected ? 'text-circlo-black' : 'text-white'
+                                }`} />
+                              </div>
+                              <div>
+                                <h3 className="text-circlo-black font-semibold text-lg">{category.name}</h3>
+                                <p className="text-circlo-black/60 text-sm">{itemCount} items</p>
+                              </div>
+                            </div>
+                            <button className="text-circlo-black/50">
+                              <Heart className="w-5 h-5" />
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Image */}
+                        <div className="px-4 mb-4 relative z-10">
+                          <div className="relative overflow-hidden rounded-xl h-24">
+                            <img
+                              src={category.image}
+                              alt={category.name}
+                              className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-circlo-gold/10"></div>
+                            
+                            {/* Gold shimmer effect */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-circlo-gold/20 to-transparent opacity-0"></div>
+                            
+                            {isSelected && (
+                              <div className="absolute inset-0 bg-circlo-gold/20 flex items-center justify-center">
+                                <div className="w-8 h-8 bg-gradient-gold rounded-full flex items-center justify-center shadow-lg">
+                                  <svg className="w-4 h-4 text-circlo-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                  </svg>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Footer */}
+                        <div className="px-4 pb-4 relative z-10">
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <p className="text-circlo-black/70 text-sm mb-2">{category.description}</p>
+                              <div className="flex items-center space-x-2">
+                                <div className="flex -space-x-2">
+                                  <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full border-2 border-white shadow-sm"></div>
+                                  <div className="w-6 h-6 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full border-2 border-white shadow-sm"></div>
+                                  <div className="w-6 h-6 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full border-2 border-white shadow-sm"></div>
+                                </div>
+                                <div className="flex items-center space-x-1">
+                                  <Star className="w-3 h-3 text-circlo-gold fill-current" />
+                                  <span className="text-circlo-black/60 text-xs font-medium">4.8</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <button 
+                            className={`w-full mt-3 py-2 px-4 rounded-lg font-semibold text-sm ${
+                              isSelected
+                                ? 'bg-gradient-gold text-circlo-black shadow-lg shadow-circlo-gold/25'
+                                : `bg-gradient-to-r ${category.gradient} text-white`
+                            }`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedCategory(category.id);
+                            }}
+                          >
+                            {isSelected ? '✓ Selected' : 'Browse Now'}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
@@ -100,7 +355,7 @@ const ListingsPage: React.FC = () => {
                 <h3 className="text-xl font-semibold text-gray-900">Filters</h3>
                 <button
                   onClick={() => setShowFilters(!showFilters)}
-                  className="text-[#FFD700] hover:text-yellow-600 p-2 rounded-lg hover:bg-yellow-50 transition-colors"
+                  className="text-[#FFD700] p-2 rounded-lg"
                 >
                   <Filter className="w-5 h-5" />
                 </button>
@@ -121,7 +376,7 @@ const ListingsPage: React.FC = () => {
                           onChange={(e) => setSelectedCategory(e.target.value)}
                           className="text-[#FFD700] focus:ring-[#FFD700] border-gray-300"
                         />
-                        <span className="ml-3 text-sm text-gray-700 capitalize group-hover:text-[#FFD700] transition-colors">
+                        <span className="ml-3 text-sm text-gray-700 capitalize">
                           {category === 'all' ? 'All Categories' : category}
                         </span>
                       </label>
@@ -197,23 +452,16 @@ const ListingsPage: React.FC = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {filteredAndSortedListings.map((listing, index) => (
-                  <motion.div
-                    key={listing.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1 * index }}
-                    whileHover={{ y: -4, boxShadow: '0 8px 32px 0 rgba(255,215,0,0.15)' }}
-                    className="group"
-                  >
+                  <div key={listing.id} className="group">
                     <Link
                       to={`/listings/${listing.id}`}
-                      className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-all overflow-hidden block"
+                      className="bg-white rounded-2xl shadow-md overflow-hidden block"
                     >
                       <div className="relative">
                         <img
                           src={listing.images[0]}
                           alt={listing.title}
-                          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                          className="w-full h-48 object-cover"
                         />
                         {listing.isVaultItem && (
                           <div className="absolute top-3 left-3 bg-[#FFD700] text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md">
@@ -227,7 +475,7 @@ const ListingsPage: React.FC = () => {
                       </div>
                       
                       <div className="p-6">
-                        <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-[#FFD700] transition-colors text-lg">
+                        <h3 className="font-semibold text-gray-900 mb-2 text-lg">
                           {listing.title}
                         </h3>
                         <p className="text-gray-600 text-sm mb-4 line-clamp-2">
@@ -256,7 +504,7 @@ const ListingsPage: React.FC = () => {
                         </div>
                       </div>
                     </Link>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             )}
