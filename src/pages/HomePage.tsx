@@ -707,7 +707,7 @@ const HomePage: React.FC = () => {
                     {/* Car Image */}
                     <div className="flex-1 flex items-center justify-center mb-4">
                       <img
-                        src={listing.images[0]}
+                        src={listing.images && listing.images.length > 0 ? listing.images[0] : 'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=800'}
                         alt={listing.title}
                         className="w-48 h-28 object-contain rounded-xl bg-circlo-white/10 group-hover:shadow-lg"
                       />

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useApp } from '../contexts/AppContext';
+import apiService from '../services/api';
 import { Upload, X, Plus, MapPin, Calendar, DollarSign } from 'lucide-react';
 import { motion } from 'framer-motion';
 import AvailabilityCalendar from '../components/AvailabilityCalendar';
@@ -113,27 +114,39 @@ const AddListingPage: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      await addListing({
-        title: formData.title,
-        description: formData.description,
-        category: formData.category,
-        price: parseFloat(formData.price),
-        priceUnit: formData.priceUnit,
-        images: formData.images.length > 0 ? formData.images : ['https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=800'],
-        location: formData.location,
-        availability: formData.availability,
-        ownerId: user.id,
-        ownerName: user.name,
-        ownerAvatar: user.avatar,
-        rating: 0,
-        reviewCount: 0,
-        isVaultItem: formData.isVaultItem,
-        vaultStory: formData.vaultStory
-      });
+      // Create FormData for file upload
+      const formDataToSend = new FormData();
+      formDataToSend.append('title', formData.title);
+      formDataToSend.append('description', formData.description);
+      formDataToSend.append('category', formData.category);
+      formDataToSend.append('price', formData.price);
+      formDataToSend.append('price_unit', formData.priceUnit);
+      formDataToSend.append('location', formData.location);
+      
+      if (formData.isVaultItem) {
+        formDataToSend.append('is_vault_item', 'true');
+        formDataToSend.append('vault_story', formData.vaultStory);
+      }
 
-      navigate('/dashboard');
+      // Add images if available
+      if (formData.images.length > 0) {
+        // For now, we'll use placeholder images
+        // In a real implementation, you'd upload actual files
+        formDataToSend.append('images', JSON.stringify(formData.images));
+      }
+
+      const response = await apiService.createListing(formDataToSend);
+      
+      if (response.success) {
+        // Refresh listings in the app context
+        // This will trigger a re-fetch from the backend
+        navigate('/dashboard');
+      } else {
+        throw new Error(response.error || 'Failed to create listing');
+      }
     } catch (error) {
       console.error('Error adding listing:', error);
+      alert('Failed to create listing. Please try again.');
     } finally {
       setIsSubmitting(false);
     }

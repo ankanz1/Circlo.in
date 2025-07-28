@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useApp } from '../contexts/AppContext';
 import { useAuth } from '../contexts/AuthContext';
+import apiService from '../services/api';
 import { 
   Calendar, 
   MapPin, 
@@ -83,11 +84,27 @@ const BookingPage: React.FC = () => {
     
     setIsProcessing(true);
     
-    // Simulate payment processing
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsProcessing(false);
-    setBookingComplete(true);
+    try {
+      const bookingData = {
+        itemId: id!,
+        startDate,
+        endDate,
+        totalAmount: total
+      };
+      
+      const response = await apiService.createBooking(bookingData);
+      
+      if (response.success) {
+        setBookingComplete(true);
+      } else {
+        throw new Error(response.error || 'Booking failed');
+      }
+    } catch (error) {
+      console.error('Booking error:', error);
+      alert('Booking failed. Please try again.');
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   if (bookingComplete) {
@@ -143,7 +160,7 @@ const BookingPage: React.FC = () => {
           <div className="space-y-6">
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
               <img
-                src={listing.images[0]}
+                src={listing.images && listing.images.length > 0 ? listing.images[0] : 'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=800'}
                 alt={listing.title}
                 className="w-full h-48 object-cover"
               />

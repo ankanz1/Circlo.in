@@ -459,7 +459,7 @@ const ListingsPage: React.FC = () => {
                     >
                       <div className="relative">
                         <img
-                          src={listing.images[0]}
+                          src={listing.images && listing.images.length > 0 ? listing.images[0] : 'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=800'}
                           alt={listing.title}
                           className="w-full h-48 object-cover"
                         />

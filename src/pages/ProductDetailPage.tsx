@@ -181,12 +181,12 @@ const ProductDetailPage: React.FC = () => {
           >
             <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg">
               <img
-                src={listing.images[currentImageIndex]}
+                src={listing.images && listing.images.length > 0 ? listing.images[currentImageIndex] : 'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=800'}
                 alt={listing.title}
                 className="w-full h-96 object-cover"
               />
               
-              {listing.images.length > 1 && (
+              {listing.images && listing.images.length > 1 && (
                 <>
                   <button
                     onClick={prevImage}
@@ -226,7 +226,7 @@ const ProductDetailPage: React.FC = () => {
             </div>
 
             {/* Image Thumbnails */}
-            {listing.images.length > 1 && (
+            {listing.images && listing.images.length > 1 && (
               <div className="flex space-x-3 overflow-x-auto">
                 {listing.images.map((image, index) => (
                   <button

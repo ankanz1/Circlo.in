@@ -13,7 +13,8 @@ const RegisterPage: React.FC = () => {
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    phone: ''
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
@@ -33,7 +34,7 @@ const RegisterPage: React.FC = () => {
     }
     
     try {
-      await register(formData.name, formData.email, formData.password);
+      await register(formData.name, formData.email, formData.password, formData.phone);
       navigate('/');
     } catch (err) {
       setError('Registration failed. Please try again.');
